@@ -20,13 +20,40 @@ export class KMarkdownNode<T extends Record<string, any> = Record<string, any>> 
 }
 ```
 
-## 内置节点与覆盖映射 (nodeMap)
+## 内置节点全览与覆盖映射 (nodeMap)
 
-官方自带了一大批对应的语法树节点类。例如：
+官方自带了完整的语法树节点类，以下是所有内置节点的 `id` 及其 `args` 参数结构：
 
-1. `KMarkdownTitleNode`: 持有 `args: { id?: string; level: number }`，即标题等级。
-2. `KMarkdownLinkNode`: 持有 `args: { href: string; alt: string; }`。
-3. `KMarkdownTableNode` 及对应的 `Row/Cell` 派生节点。
+| 节点 ID (Node ID) | 对应类 (Class) | 携带参数 (`args`) |
+| --- | --- | --- |
+| `root` | `KMarkdownRootNode` | `{ createOption: FullOption }` |
+| `title` | `KMarkdownTitleNode` | `{ level: number, id?: string }` |
+| `paragraph` | `KMarkdownParagraphNode` | — |
+| `quote-block` | `KMarkdownQuoteBlockNode` | — |
+| `code-block` | `KMarkdownCodeBlockNode` | `{ language?: string }` |
+| `code-inline` | `KMarkdownCodeInlineNode` | — |
+| `latex-block` | `KMarkdownLatexBlockNode` | — |
+| `latex-inline` | `KMarkdownLatexInlineNode` | — |
+| `line-between` | `KMarkdownLineBetweenNode` | — |
+| `bold` | `KMarkdownBoldNode` | — |
+| `italic` | `KMarkdownItalicNode` | — |
+| `delete-line` | `KMarkdownDeleteLineNode` | — |
+| `subscript` | `KMarkdownSubscriptNode` | — |
+| `superscript` | `KMarkdownSuperscriptNode` | — |
+| `image` | `KMarkdownImageNode` | `{ src: string, alt: string, title?: string }` |
+| `link` | `KMarkdownLinkNode` | `{ href: string, alt: string }` |
+| `email` | `KMarkdownEmailNode` | `{ email: string }` |
+| `emoji` | `KMarkdownEmojiNode` | `{ name: string }` |
+| `unordered-list` | `KMarkdownUnorderedListNode` | — |
+| `unordered-list-item` | `KMarkdownUnorderedListItemNode` | — |
+| `ordered-list` | `KMarkdownOrderedListNode` | — |
+| `ordered-list-item` | `KMarkdownOrderedListItemNode` | `{ indexInWriting: number }` |
+| `task-list` | `KMarkdownTaskListNode` | — |
+| `task-list-item` | `KMarkdownTaskListItemNode` | `{ finished: boolean }` |
+| `table` | `KMarkdownTableNode` | — |
+| `table-row` | `KMarkdownTableRowNode` | `{ isHeader: boolean }` |
+| `table-cell` | `KMarkdownTableCellNode` | `{ align?: 'left' \| 'center' \| 'right' }` |
+| `xml` | `KMarkdownXMLNode` | `{ name: string, attributes: Record<string, string> }` |
 
 如果遇到你需要彻底更改某个 Node 的抽象或携带更多状态参数。你并不需要直接硬编码去改组件源。可以通过修改实例化时的 `nodeMap`：
 

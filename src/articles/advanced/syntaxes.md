@@ -39,3 +39,37 @@ export type KMarkdownSyntaxMatchResult = {
 
 因为使用了 Regex 正则多段式驱动：  
 在同一个组 `Group` 下执行的所有 `syntax.matcher()` 命中冲突时，解析器通过一个内部比较碰撞算法（Sort并优先最长匹配），来解决谁优先独占字符范围权。这意味着你可以通过编写相对容易看懂的正则是去吃入文本，剩下的边界冲突化解交给 `k-markdown-parser` 引擎。
+
+## 示例：实现 `==highlight==` 高亮语法
+
+下面这个例子展示了如何通过新增一个语法与节点类来实现对双等号包裹文字的高亮渲染：
+
+```javascript
+import KMarkdownParser from '@kuankuan/k-markdown-parser';
+import { defaultSyntaxes, defaultNodeMap } from '@kuankuan/k-markdown-parser/options';
+import { KMarkdownNode } from '@kuankuan/k-markdown-parser';
+ 
+class KMarkdownHighlightNode extends KMarkdownNode {
+  id = 'highlight';
+}
+ 
+const highlightSyntax = {
+  name: 'highlight',
+  matcher(text) {
+    return [...text.matchAll(/==(.+?)==/gs)].map((m) => ({
+      startIndex: m.index,
+      length: m[0].length,
+      node: { name: 'highlight', content: [m[1]] },
+    }));
+  },
+};
+ 
+const parser = new KMarkdownParser({
+  syntaxes: defaultSyntaxes.map((group) =>
+    group.name === 'inline'
+      ? { ...group, syntaxes: [...group.syntaxes, highlightSyntax] }
+      : group
+  ),
+  nodeMap: { ...defaultNodeMap, highlight: KMarkdownHighlightNode },
+});
+```

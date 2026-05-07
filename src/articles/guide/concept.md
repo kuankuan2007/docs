@@ -27,3 +27,44 @@ const innerString = parser.markdown2Inner(text);
 
 所有在匹配命中的结构都被包装为 `KMarkdownNode<T>`。  
 当调用 `const root = parser.parse(md)` 时，系统从根递归遍历生成的节点，最终交给消费端。用户完全可以自己编写自己的树渲染逻辑（例如用 Vue/React JSX 遍历这个 `rootNode` 并在你的框架里进行组件关联）。
+
+## 4. API 参考
+
+`KMarkdownParser` 的实例对象除了 `.parse(text)` 之外，还暴露了以下常用方法：
+
+- **`.parse(text: string): KMarkdownRootNode`**
+  解析 Markdown 字符串并返回语法树的根节点。
+
+- **`.markdown2Inner(text: string): string`**
+  将原始 Markdown 文本转换为内部的防止干涉转义表示形式，这通常用于底层逻辑的定制。
+
+- **`.inner2Markdown(text: string): string`**
+  将包含内部占位符的文本恢复为正常的 Markdown。如果你要在节点中还原转义文字，这是必不可少的方法。
+
+- **`.inner2Plant(text: string): string`**
+  将内部表示形式转换为纯文本（剥离转义符号和占位符）。用于提取没有任何多余标点的清洗后文本内容。
+
+## 5. 配置项 (Options)
+
+在实例化解析器时，可以传入配置项 `new KMarkdownParser(options?)`。主要包括：
+
+```typescript
+type Option = Readonly<{
+  syntaxes?: SyntaxesGroup[];
+  replacerTagStart?: string;
+  replacerTagMap?: {
+    [key: symbol]: string;
+    '\\\\': string;
+    [key: string]: string;
+  };
+  nodeMap?: {
+    [key: string]: typeof KMarkdownNode;
+  };
+  autoParseLink?: boolean;
+}>;
+```
+
+- **`.syntaxes`**: 定义解析流水线（传递命名的语法集合），这是改变解析顺序和组合核心能力的开关。
+- **`.replacerTagStart`**: 替换标记符号的定义，默认即可良好运作。若要变更占位符则可以通过此配置传递覆盖。
+- **`.nodeMap`**: AST 节点的替换字典。若你需要替换内置的输出节点以便存储你的私有数据，请传递配置覆写。
+- **`.autoParseLink`**: 默认开启，是否要识别并在普通文本中自动抓取裸 URL 转换成 Link 节点。
