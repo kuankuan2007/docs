@@ -1,25 +1,14 @@
-# 文档服务器模版
+# k-markdown-parser 官方文档
 
-## 起因
+欢迎来到 **k-markdown-parser** 的官方文档！
 
-最开始，我的文档都是单个markdown,后来吧，随着项目越来越复杂，需要的内容页越来越繁杂，慢慢发现一个单独的README.md不够用了waw，但是目前为止又没有一个完整的多文档的方案，很恼火。所以干脆就自己手撸一个吧哈哈哈。
+`@kuankuan/k-markdown-parser` 是一个由宽宽独立开发与维护的轻量、快速的 Markdown 解析器。它将 Markdown 文本转换为结构化的抽象语法树（AST）。
 
-## 简介
+## 设计哲学
 
-本模版适用于中小型的项目对文档进行分页展示。配置简单，快速成型。内置亮色/暗色主题，支持跟随系统。
+1. **绝对纯净的运行环境**：零外部依赖，纯 JavaScript/TypeScript 编写。不需要任何特定于 Node.js 或浏览器的内置包，可在 Deno、Bun、甚至嵌入式 QuickJS 环境中运行。
+2. **极小体积**：IIFE 的打包版本仅约 28KB，非常适合前端富文本环境。
+3. **正则驱动的设计**：所有的块级与行内语法分析全部由正则表达式完成，而不是传统的字符吃入/词法分析循环。解析过程通过多阶流水线管理碰撞状态。
+4. **高度模块化扩展**：无论是“解析规则 (Syntaxes)”、“流水线组名 (Groups)”还是“输出节点层 (NodeMap)”全部是可配置且可覆盖的。
 
-## 更新
-
-2026年5月6日: 代码高亮引擎深度重构，移除单纯的 `highlight.js` 方案，采用 `shiki` 优先 + `highlight.js` 兜底的形式，提供媲美 VS Code 的高亮保真度。同时实现了开箱即用支持 `shiki` 按需加载的 Vite 插件，详见[代码高亮机制](detail/highlight)。
-
-2026年4月30日: Markdown 渲染引擎从 showdown 全面切换为自研的 [@kuankuan/k-markdown-parser](https://github.com/kuankuan2007/k-markdown-parser) + [@kuankuan/k-markdown-vue](https://github.com/kuankuan2007/k-markdown-vue)，实现基于 AST 的 Vue 原生渲染，支持 LaTeX、代码高亮与自定义节点组件。
-
-2026年3月9日: 这个项目进行了完全重构，并重新发布
-
-## 文档
-
-这个文档很多地方是用AI生成用来凑数的，嗯对，主要是用来验证目录结构
-
-## 开源
-
-本项目使用[MPL-2.0](https://opensource.org/license/mpl-2-0/)协议开源。请注意，本项目中的LOGO为原作者版权所有，不授予其他人使用。
+继续阅读 [新手指南](guide/index) 以快速在你的页面上接入 parser。

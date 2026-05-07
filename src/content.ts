@@ -8,47 +8,37 @@ const content: ArticleOptions = {
   article: 'index.md',
   title: '开端',
   subArticles: {
-    start: {
-      article: 'start.md',
-      title: '快速开始',
-    },
-    detail: {
-      article: 'detail/index.md',
-      title: '项目细节',
+    guide: {
+      article: 'guide/index.md',
+      title: '新手指南',
       subArticles: {
-        content: {
-          article: 'detail/content.md',
-          title: '内容系统',
-        },
-        theme: {
-          article: 'detail/theme.md',
-          title: '主题',
-        },
-        'markdown-engine': {
-          article: 'detail/markdown-engine.md',
-          title: 'Markdown 渲染引擎',
-        },
-        highlight: {
-          article: 'detail/highlight.md',
-          title: '代码高亮',
-        },
-        tooling: {
-          article: 'detail/tooling.md',
-          title: '工程化',
+        concept: {
+          article: 'guide/concept.md',
+          title: '原理解析与系统概念',
         },
       },
     },
-    test: {
-      article: 'test.md',
-      title: '测试',
-    },
-
-    thanks: {
-      article: 'thanks.md',
-      title: '致谢',
+    advanced: {
+      article: 'advanced/index.md',
+      title: '进阶深度定制',
+      subArticles: {
+        pipeline: {
+          article: 'advanced/pipeline.md',
+          title: '解析流水线 (Pipeline)',
+        },
+        syntaxes: {
+          article: 'advanced/syntaxes.md',
+          title: '自定义语法与正则匹配',
+        },
+        nodes: {
+          article: 'advanced/nodes.md',
+          title: 'AST 节点与扩展',
+        },
+      },
     },
   },
 };
+
 export const notFound: ArticleOptions = {
   article: '404.md',
   title: 'Not Found',
