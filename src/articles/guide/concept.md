@@ -28,19 +28,25 @@ const innerString = parser.markdown2Inner(text);
 所有在匹配命中的结构都被包装为 `KMarkdownNode<T>`。  
 当调用 `const root = parser.parse(md)` 时，系统从根递归遍历生成的节点，最终交给消费端。用户完全可以自己编写自己的树渲染逻辑（例如用 Vue/React JSX 遍历这个 `rootNode` 并在你的框架里进行组件关联）。
 
+> **💡 实践案例：本站点是由该库驱动的！**
+>
+> 你当前所阅读的这个文档和网站，底层就是用本库自身来实现的！这个文档由 `k-markdown-parser` 和 `@kuankuan/k-markdown-vue` 共同提供支持：
+>
+> - `k-markdown-parser`：负责将 Markdown 内容深度解析为抽象语法树（AST）。
+> - `@kuankuan/k-markdown-vue`：负责将语法树渲染到页面上展示。
+>
+> 如果你在使用 Vue 框架，可以参考或直接使用该渲染库：[k-markdown-vue](https://github.com/kuankuan2007/k-markdown-vue)
+
 ## 4. API 参考
 
 `KMarkdownParser` 的实例对象除了 `.parse(text)` 之外，还暴露了以下常用方法：
 
 - **`.parse(text: string): KMarkdownRootNode`**
   解析 Markdown 字符串并返回语法树的根节点。
-
 - **`.markdown2Inner(text: string): string`**
   将原始 Markdown 文本转换为内部的防止干涉转义表示形式，这通常用于底层逻辑的定制。
-
 - **`.inner2Markdown(text: string): string`**
   将包含内部占位符的文本恢复为正常的 Markdown。如果你要在节点中还原转义文字，这是必不可少的方法。
-
 - **`.inner2Plant(text: string): string`**
   将内部表示形式转换为纯文本（剥离转义符号和占位符）。用于提取没有任何多余标点的清洗后文本内容。
 
