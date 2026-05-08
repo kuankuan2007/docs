@@ -123,33 +123,37 @@ export const dynamicLangs = {
 export const dynamicThemes = {
   ${dynamicThemes.map((i) => `'${i.name}': () => ${i.code},`).join('\n')}
 };
-export async function loadLangs(shiki, lang) {
-  if (shiki.getLoadedLanguages().includes(lang)) {
-    return;
-  }
-  if (lang in dynamicLangs) {
-    await shiki.loadLanguage(dynamicLangs[lang]());
-  } else {
-    throw new Error('Unknown language');
+export async function loadLangs(shiki, langs) {
+  for(const lang of langs) {
+    if (shiki.getLoadedLanguages().includes(lang)) {
+      return;
+    }
+    if (lang in dynamicLangs) {
+      await shiki.loadLanguage(dynamicLangs[lang]());
+    } else {
+      throw new Error('Unknown language');
+    }
   }
 }
-export async function loadTheme(theme) {
-  if (shiki.getLoadedThemes().includes(theme)) {
-    return;
-  }
-  if (theme in dynamicThemes) {
-    await shiki.loadTheme(dynamicThemes[theme]());
-  } else {
-    throw new Error('Unknown theme');
+export async function loadThemes(shiki, themes) {
+  for(const theme of themes) {
+    if (shiki.getLoadedThemes().includes(theme)) {
+      return;
+    }
+    if (theme in dynamicThemes) {
+      await shiki.loadTheme(dynamicThemes[theme]());
+    } else {
+      throw new Error('Unknown theme');
+    }
   }
 }
 
-export async function getShikiWithLang(lang) {
+export async function getShikiWith(langs, themes) {
   const shiki = await getShiki();
-  await loadLangs(shiki, lang);
+  langs && await loadLangs(shiki, langs);
+  themes && await loadThemes(shiki, themes);
   return shiki;
 }
-
 `;
       }
     },

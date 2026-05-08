@@ -13,8 +13,8 @@ declare module 'visual:k-shiki-auto-import.ts' {
   export declare const dynamicThemes: {
     vue: () => Promise<typeof import('shiki/dist/langs/vue.mjs')>;
   };
-  export declare function loadLangs(shiki: AnyHighlighterGeneric, lang: string): Promise<void>;
-  export declare function loadTheme(theme: string): Promise<void>;
-  export declare function getShikiWithLang(lang: string): Promise<import('shiki').HighlighterCore>;
+  export declare function loadLangs(shiki: AnyHighlighterGeneric, langs: string[]): Promise<void>;
+  export declare function loadThemes(shiki: AnyHighlighterGeneric, themes: string[]): Promise<void>;
+  export declare function getShikiWith(langs: string[], themes: string[]): Promise<import('shiki').HighlighterCore>;
   export {};
 }

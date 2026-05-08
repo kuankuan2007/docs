@@ -1,4 +1,4 @@
-import { getShikiWithLang } from 'visual:k-shiki-auto-import.ts';
+import { getShikiWith } from 'visual:k-shiki-auto-import.ts';
 import flourite from 'flourite';
 import hljs from 'highlight.js';
 
@@ -20,7 +20,7 @@ async function highlightCode(
   if (!lang) {
     lang = guessCodeLanguage(code);
   }
-  const result = await getShikiWithLang(lang);
+  const result = await getShikiWith([lang], ['github-dark', 'github-light']);
   return {
     html: result.codeToHtml(code, {
       lang,
@@ -43,7 +43,6 @@ export const highlighterByShiki: HighlightInterface<HighlighterInfoByShiki> = {
     if (!preferLang) {
       preferLang = guessCodeLanguage(code);
     }
-    console.log(preferLang);
     return highlightCode(code, preferLang).catch((error) => {
       console.error(error);
       if (hljs.getLanguage(preferLang)) {

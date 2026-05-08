@@ -15,20 +15,42 @@ const sassAddition = `
 @use '@kuankuan/assist-2026/styles/motion.scss';
 @use 'sass:math';
 @use 'sass:color';`;
+
 const dirname = import.meta.dirname.replaceAll('\\', '/');
-function getNodeModulesPath(name: string) {
-  return path.posix.join(dirname, 'node_modules', name);
+
+function getNodeModulesRegexp(name: string): RegExp {
+  return new RegExp(`node_modules/(.*/)*${name}(@.*)/`);
 }
 
-const chunkConfig = {
-  markdown: [
-    getNodeModulesPath('showdown'),
-    getNodeModulesPath('showdown-katex'),
-    getNodeModulesPath('katex'),
-  ],
-  hightlight: [getNodeModulesPath('highlight.js')],
-};
+type Spliter = RegExp | string | ((id: string) => boolean);
 
+function testSpliter(spliter: Spliter, id: string): boolean {
+  if (typeof spliter === 'string') {
+    return id.includes(spliter);
+  }
+  if (typeof spliter === 'function') {
+    return spliter(id);
+  }
+  return id.match(spliter) !== null;
+}
+
+const chunkConfig: Record<string, Spliter[]> = {
+  kmarkdown: [
+    getNodeModulesRegexp('@kuankuan\\+k-markdown-parser'),
+    getNodeModulesRegexp('@kuankuan\\+k-markdown-vue'),
+  ],
+  katex: [getNodeModulesRegexp('katex')],
+  hightlight: [getNodeModulesRegexp('highlight.js')],
+  shiki: [
+    ...[
+      getNodeModulesRegexp('shiki'),
+      getNodeModulesRegexp('@shikijs\\+core'),
+      getNodeModulesRegexp('@shikijs\\+engine-oniguruma'),
+    ].map(
+      (reg) => (id: string) => reg.test(id) && !id.includes('/langs/') && !id.includes('/themes/')
+    ),
+  ],
+};
 const extToDir = {
   script: ['.js'],
   style: ['.css'],
@@ -108,9 +130,7 @@ export default defineConfig({
         codeSplitting: {
           groups: Object.entries(chunkConfig).map(([key, value]) => ({
             name: key,
-            test: (id) => {
-              return value.some((item) => id.startsWith(item));
-            },
+            test: (id) => value.some((item) => testSpliter(item, id)),
           })),
         },
         entryFileNames: function (chunkInfo) {
@@ -121,19 +141,24 @@ export default defineConfig({
           return pathName;
         },
         chunkFileNames: function (chunk) {
-          if (chunk.facadeModuleId?.includes('node_modules/shiki/dist/langs')) {
-            return 'script/shiki/langs/[name]-[hash].js';
-          }
-          if (chunk.facadeModuleId?.includes('node_modules/shiki/dist/themes')) {
-            return 'script/shiki/themes/[name]-[hash].js';
-          }
-          if (chunk.facadeModuleId?.includes('src/articles')) {
-            const rPath = path.relative(
-              path.resolve(dirname, 'src/articles'),
-              chunk.facadeModuleId!
-            );
-            const prefix = path.join('articles', path.dirname(rPath));
-            return `${prefix}/[name]-[hash].js`;
+          for (const modules of chunk.moduleIds) {
+            if (
+              modules.includes('node_modules/shiki/dist/langs') ||
+              modules.includes('node_modules/@shikijs/langs')
+            ) {
+              return 'script/shiki/langs/[name]-[hash].js';
+            }
+            if (
+              modules.includes('node_modules/shiki/dist/themes') ||
+              modules.includes('node_modules/@shikijs/themes')
+            ) {
+              return 'script/shiki/themes/[name]-[hash].js';
+            }
+            if (modules.includes('src/articles')) {
+              const rPath = path.relative(path.resolve(dirname, 'src/articles'), modules!);
+              const prefix = path.join('articles', path.dirname(rPath)).replace(/\\/g, '/');
+              return `${prefix}/[name]-[hash].js`;
+            }
           }
           return 'script/[name]-[hash].js';
         },
