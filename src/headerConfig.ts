@@ -5,6 +5,6 @@ type HeaderLinkConfig = {
 export const headerLinks: HeaderLinkConfig[] = [
   {
     icon: 'github',
-    href: 'https://github.com/kuankuan2007/multi-page-document-template',
+    href: 'https://github.com/kuankuan2007/k-markdown-vue',
   },
 ];
