@@ -12,11 +12,11 @@ importers:
         specifier: ^0.1.16
         version: 0.1.16(typescript@6.0.3)(vite@8.0.10(@types/node@25.6.0)(jiti@2.7.0)(sass@1.99.0)(terser@5.46.2)(yaml@2.8.4))
       '@kuankuan/k-markdown-parser':
-        specifier: ^1.3.6
-        version: 1.3.7
+        specifier: ^1.3.8
+        version: 1.3.8
       '@kuankuan/k-markdown-vue':
-        specifier: ^0.1.11
-        version: 0.1.11(highlight.js@11.11.1)(typescript@6.0.3)
+        specifier: ^0.1.13
+        version: 0.1.13(highlight.js@11.11.1)(typescript@6.0.3)
       flourite:
         specifier: ^1.3.0
         version: 1.3.0
@@ -664,11 +664,11 @@ packages:
     peerDependencies:
       vite: '>=7.0.0'
 
-  '@kuankuan/k-markdown-parser@1.3.7':
-    resolution: {integrity: sha512-u1D76ZezrQSVZSbw52dAPV1Bd8bxQBVytSWQS258XhG7i6l/5+Qk7iYuLaliIxFRP8ONbJRlkToxvnn2cB/Fmw==}
+  '@kuankuan/k-markdown-parser@1.3.8':
+    resolution: {integrity: sha512-6q3i1s85bGUUn5r8alL2Qhk3juU22/QBAl4cE0+exbNsaW1Rdaco1AbTn3NMqNps8EnZJlk14I39jEX2cQjC1Q==}
 
-  '@kuankuan/k-markdown-vue@0.1.11':
-    resolution: {integrity: sha512-5+Hpt47onXR+zWnJZ2SN2EF++8DtNLiQuFORdY0LJzNvgHdfOjKT/DmZtbgE5EO84zbbthUIIrSvArK8pYTcpw==}
+  '@kuankuan/k-markdown-vue@0.1.13':
+    resolution: {integrity: sha512-cKWfyiQGG4LIEp6JE8JCOEoFIC7E75DxxzerdDX7ghwES2O24huLoaro5rkCMib5mlDt8sxnXxI/VsyLcMLwcg==}
     peerDependencies:
       highlight.js: '>=11.0.0'
     peerDependenciesMeta:
@@ -1808,6 +1808,10 @@ packages:
     resolution: {integrity: sha512-pQpZbdBu7wCTmQUh7ufPmLr0pFoObnGUoL/yhtwJDgmmQpbkg/0HSVti25Fu4rmd1oCR6NGWe9vqTWuWv3GcNA==}
     hasBin: true
 
+  katex@0.17.0:
+    resolution: {integrity: sha512-Vdw0ATsQ9V+LuegM/BTwQqV/6cTl5lbGcIrU+BCgLxyf6bo38ybOr372tuSIxir3CN720flu1meYR6XzNMwQnw==}
+    hasBin: true
+
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
@@ -2381,10 +2385,6 @@ packages:
 
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
-
-  postcss@8.5.14:
-    resolution: {integrity: sha512-SoSL4+OSEtR99LHFZQiJLkT59C5B1amGO1NzTwj7TT1qCUgUO6hxOvzkOYxD+vMrXBM3XJIKzokoERdqQq/Zmg==}
-    engines: {node: ^10 || ^12 || >=14}
 
   postcss@8.5.15:
     resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
@@ -3519,12 +3519,12 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@kuankuan/k-markdown-parser@1.3.7': {}
+  '@kuankuan/k-markdown-parser@1.3.8': {}
 
-  '@kuankuan/k-markdown-vue@0.1.11(highlight.js@11.11.1)(typescript@6.0.3)':
+  '@kuankuan/k-markdown-vue@0.1.13(highlight.js@11.11.1)(typescript@6.0.3)':
     dependencies:
-      '@kuankuan/k-markdown-parser': 1.3.7
-      katex: 0.16.45
+      '@kuankuan/k-markdown-parser': 1.3.8
+      katex: 0.17.0
       vue: 3.5.35(typescript@6.0.3)
     optionalDependencies:
       highlight.js: 11.11.1
@@ -3910,7 +3910,7 @@ snapshots:
       '@vue/shared': 3.5.33
       estree-walker: 2.0.2
       magic-string: 0.30.21
-      postcss: 8.5.14
+      postcss: 8.5.15
       source-map-js: 1.2.1
 
   '@vue/compiler-sfc@3.5.35':
@@ -4672,6 +4672,10 @@ snapshots:
     dependencies:
       commander: 8.3.0
 
+  katex@0.17.0:
+    dependencies:
+      commander: 8.3.0
+
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
@@ -5289,12 +5293,6 @@ snapshots:
 
   postcss-value-parser@4.2.0: {}
 
-  postcss@8.5.14:
-    dependencies:
-      nanoid: 3.3.12
-      picocolors: 1.1.1
-      source-map-js: 1.2.1
-
   postcss@8.5.15:
     dependencies:
       nanoid: 3.3.12
@@ -5712,7 +5710,7 @@ snapshots:
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
-      postcss: 8.5.14
+      postcss: 8.5.15
       rolldown: 1.0.0-rc.17
       tinyglobby: 0.2.16
     optionalDependencies:

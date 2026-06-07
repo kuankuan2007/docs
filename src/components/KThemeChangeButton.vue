@@ -21,26 +21,4 @@ function changeToNextTheme() {
 }
 </script>
 <style scoped lang="scss">
-button.theme-button {
-  appearance: none;
-  all: unset;
-  font-size: 2em;
-  cursor: pointer;
-  @include motion.transition(0.3s);
-  padding: 0.1em;
-  border: 0.1em solid transparent;
-  border-radius: 0.3em;
-
-  &:focus {
-    @include theme.use {
-      border-color: theme.get('active-color');
-    }
-  }
-
-  &:hover {
-    @include theme.use {
-      color: theme.get('active-color');
-    }
-  }
-}
 </style>
