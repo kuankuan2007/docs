@@ -1,25 +1,18 @@
-# 文档服务器模版
+# @kuankuan/k-markdown-vue
 
-## 起因
+[![npm version](https://img.shields.io/npm/v/@kuankuan/k-markdown-vue)](https://www.npmjs.com/package/@kuankuan/k-markdown-vue)
+[![license](https://img.shields.io/badge/license-MulanPSL--2.0-blue)](./LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-black?logo=github)](https://github.com/kuankuan2007/k-markdown-vue)
 
-最开始，我的文档都是单个markdown,后来吧，随着项目越来越复杂，需要的内容页越来越繁杂，慢慢发现一个单独的README.md不够用了waw，但是目前为止又没有一个完整的多文档的方案，很恼火。所以干脆就自己手撸一个吧哈哈哈。
+一个用于渲染 Markdown 的 Vue 3 组件：底层使用
+[@kuankuan/k-markdown-parser](https://github.com/kuankuan2007/k-markdown-parser) 将 Markdown 解析为 AST，
+再按节点类型进行渲染，并内置 KaTeX（LaTeX）与 highlight.js（代码高亮）。
 
-## 简介
+## 特性
 
-本模版适用于中小型的项目对文档进行分页展示。配置简单，快速成型。内置亮色/暗色主题，支持跟随系统。
-
-## 更新
-
-2026年5月6日: 代码高亮引擎深度重构，移除单纯的 `highlight.js` 方案，采用 `shiki` 优先 + `highlight.js` 兜底的形式，提供媲美 VS Code 的高亮保真度。同时实现了开箱即用支持 `shiki` 按需加载的 Vite 插件，详见[代码高亮机制](detail/highlight)。
-
-2026年4月30日: Markdown 渲染引擎从 showdown 全面切换为自研的 [@kuankuan/k-markdown-parser](https://github.com/kuankuan2007/k-markdown-parser) + [@kuankuan/k-markdown-vue](https://github.com/kuankuan2007/k-markdown-vue)，实现基于 AST 的 Vue 原生渲染，支持 LaTeX、代码高亮与自定义节点组件。
-
-2026年3月9日: 这个项目进行了完全重构，并重新发布
-
-## 文档
-
-这个文档很多地方是用AI生成用来凑数的，嗯对，主要是用来验证目录结构
-
-## 开源
-
-本项目使用[MPL-2.0](https://opensource.org/license/mpl-2-0/)协议开源。请注意，本项目中的LOGO为原作者版权所有，不授予其他人使用。
+- Vue 3 + TypeScript
+- 使用 `@kuankuan/k-markdown-parser` 进行快速解析
+- KaTeX 渲染 LaTeX（按需开启）
+- highlight.js 代码高亮
+- XML 默认安全策略（默认：`warn`）
+- 支持按节点类型自定义渲染组件

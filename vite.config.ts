@@ -76,20 +76,8 @@ export default defineConfig({
     }),
     VitePluginShikiAutoImport({
       lang: {
-        static: ['typescript', 'javascript', 'bash', 'css'],
-        dynamic: [
-          'python',
-          'rust',
-          'go',
-          'java',
-          'c',
-          'cpp',
-          'html',
-          'scss',
-          'json',
-          'vue',
-          'markdown',
-        ],
+        static: ['typescript', 'javascript', 'bash', 'css', 'vue'],
+        dynamic: ['python', 'rust', 'go', 'java', 'c', 'cpp', 'html', 'scss', 'json', 'markdown'],
       },
       theme: {
         static: ['github-light', 'github-dark'],

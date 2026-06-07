@@ -1,25 +1,32 @@
 
-# Multi-page Document Template
+# doc-k-markdown-vue
 
-This template turns a long project doc into multiple Markdown pages and renders them as a sidebar + article viewer.
+Documentation site for `@kuankuan/k-markdown-vue`.
 
-## Documentation
+## Purpose
 
-Tutorials, configuration and detailed guides: [Example](https://multi-page-document-template.pages.kuankuan.site/)
+This app renders the project documentation with the library itself, so it also serves as a real integration example for:
 
-## Start Dev Server (minimal)
+- custom node renderers
+- custom code highlighting
+- internal / external link handling
+- LaTeX rendering
 
-Developed on Node `24.14.0` (see `.nvmrc`).
+## Development
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
----
+## Build
 
-## License
+```bash
+pnpm build
+```
 
-Licensed under [MPL-2.0](https://opensource.org/license/mpl-2-0/).
+## Notes
 
-> Note: the LOGO is copyrighted by the original author and is not granted for reuse.
+- The docs source lives in `src/articles/`.
+- The viewer components live in `src/components/`.
+- This site imports `k-markdown-vue` both from the published package and, for some repo-internal examples, from source subpaths.

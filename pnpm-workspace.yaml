@@ -1,2 +1,4 @@
 allowBuilds:
   '@parcel/watcher': true
+overrides:
+  '@kuankuan/k-markdown-parser': link:C:/Users/kuankuan/AppData/Local/pnpm/global/5/node_modules/@kuankuan/k-markdown-parser
