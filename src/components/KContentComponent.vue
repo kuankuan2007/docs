@@ -22,12 +22,14 @@
     </p>
     <k-auto-height-folding ref="autoHeightFolding" :fold="fold" v-if="props.data.subArticles">
       <ul>
-        <k-content-component
-          v-for="subArticle in props.data.subArticles"
-          :key="subArticle.id ?? '_root'"
-          :data="subArticle"
-          :path-tree="subArticle.id === pathTree[1] ? pathTree.slice(1) : []"
-        />
+        <li>
+          <k-content-component
+            v-for="subArticle in props.data.subArticles"
+            :key="subArticle.id ?? '_root'"
+            :data="subArticle"
+            :path-tree="subArticle.id === pathTree[1] ? pathTree.slice(1) : []"
+          />
+        </li>
       </ul>
     </k-auto-height-folding>
   </div>
