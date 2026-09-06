@@ -47,4 +47,4 @@ console.log(rootNode);
 
 默认生成的 `rootNode` 是 `KMarkdownRootNode` 类的实例，它的 `content` 包含了按照解析结果平铺或嵌套的所有子节点层级（`KMarkdownTitleNode` / `KMarkdownParagraphNode` 等）。每一层级节点如果支持包含文本，它的对应 `content` 数组内可能是字符串字面量或嵌套的其他子代节点类型。
 
-要进一步深入解析过程，请阅读[原理解析与系统概念](concept)章节。
+要进一步深入解析过程，请阅读[原理解析与系统概念](./concept)章节。
