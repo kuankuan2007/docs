@@ -5,7 +5,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-black?logo=github)](https://github.com/kuankuan2007/k-markdown-vue)
 
 一个用于渲染 Markdown 的 Vue 3 组件：底层使用
-[@kuankuan/k-markdown-parser](https://github.com/kuankuan2007/k-markdown-parser) 将 Markdown 解析为 AST，
+[@kuankuan/k-markdown-parser](https://k-markdown-parser.doc.kuankuan.site/) 将 Markdown 解析为 AST，
 再按节点类型进行渲染，并内置 KaTeX（LaTeX）与 highlight.js（代码高亮）。
 
 ## 特性
