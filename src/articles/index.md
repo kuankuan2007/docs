@@ -17,6 +17,6 @@
 6. **多种模块支持 (Multiple module formats)**：通过 ESM, CJS 与 IIFE 格式分发。
 
 > **💡 你目前正在浏览的这个网站，就是由 `@kuankuan/k-markdown-parser` 和 `@kuankuan/k-markdown-vue`（渲染器）共同驱动的。**
-> 如果你在使用 Vue 构建应用，可以直接尝试 [k-markdown-vue](https://github.com/kuankuan2007/k-markdown-vue)。
+> 如果你在使用 Vue 构建应用，可以直接尝试 [k-markdown-vue](https://k-markdown-vue.doc.kuankuan.site/)。
 
 继续阅读 [新手指南](guide) 以快速在你的页面上接入 parser。

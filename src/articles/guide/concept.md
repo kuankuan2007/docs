@@ -35,7 +35,7 @@ const innerString = parser.markdown2Inner(text);
 > - `k-markdown-parser`：负责将 Markdown 内容深度解析为抽象语法树（AST）。
 > - `@kuankuan/k-markdown-vue`：负责将语法树渲染到页面上展示。
 >
-> 如果你在使用 Vue 框架，可以参考或直接使用该渲染库：[k-markdown-vue](https://github.com/kuankuan2007/k-markdown-vue)
+> 如果你在使用 Vue 框架，可以参考或直接使用该渲染库：[k-markdown-vue](https://k-markdown-vue.doc.kuankuan.site/)
 
 ## 4. API 参考
 
